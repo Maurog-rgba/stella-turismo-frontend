@@ -1,6 +1,6 @@
-import { ArrowRight, Baby, Calendar, Mail, MapPin, Search, Users } from 'lucide-react';
+import { ArrowRight, Calendar, Mail, MapPin, Search, Users } from 'lucide-react';
 import { useState } from 'react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { PackageCard } from '../components/PackageCard';
 import { Button } from '../components/ui/button';
 import { ImageWithFallback } from '../components/ui/ImageWithFallback';
@@ -23,6 +23,7 @@ interface HomePageProps {
 export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
   const [email, setEmail] = useState('');
   const [destination, setDestination] = useState('');
+  const [origin, setOrigin] = useState('');
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
   const [adults, setAdults] = useState('2');
@@ -41,7 +42,7 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
       toast.error('Por favor, preencha todos os campos da busca');
       return;
     }
-    
+
     toast.success('Buscando viagens para ' + destination + '!', {
       description: `${adults} adulto(s) e ${children} criança(s) - ${checkIn} até ${checkOut}`
     });
@@ -114,34 +115,50 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section com Background Image */}
-      <section 
-        className="relative bg-cover bg-center text-white py-32 md:py-48"
-        style={{
-          backgroundImage: `linear-gradient(rgba(0, 102, 51, 0.5), rgba(7, 173, 62, 0.5)), url('https://images.unsplash.com/photo-1678991013254-c0ddd0ab674c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXBweSUyMGNvdXBsZSUyMHRyYXZlbGluZyUyMGJlYWNofGVufDF8fHx8MTc2MDgwNzY3MXww&ixlib=rb-4.1.0&q=80&w=1080')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
+      {/* Hero Section */}
+      <section className="relative bg-primary text-primary py-16">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-white mb-8 text-4xl md:text-5xl lg:text-6xl">
+          <h1 className="font-extrabold mb-6 text-3xl md:text-4xl lg:text-5xl">
             A viagem dos seus sonhos!
           </h1>
+          <p className="text-blue-800 mb-6 max-w-2xl mx-auto">Encontre passagens, pacotes e promoções com facilidade.</p>
         </div>
 
-        {/* Search Section - Integrated in Hero */}
-        <div className="container mx-auto px-4 mt-12">
-          <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 items-end">
+        {/* Search Card */}
+        <div className="container mx-auto px-4 mt-4">
+          <div className="bg-white rounded-3xl shadow-2xl p-3 md:p-4 max-w-6xl mx-auto">
+            {/* Tabs (Ida e volta / Só ida / Vários destinos) */}
+            {/* <div className="flex items-center gap-2 mb-3">
+              <button className="px-3 py-1.5 rounded-full bg-blue-900 text-white text-sm">Ida e volta</button>
+              <button className="px-3 py-1.5 rounded-full border border-gray-200 text-sm">Só ida</button>
+              <button className="px-3 py-1.5 rounded-full border border-gray-200 text-sm">Vários destinos</button>
+            </div> */}
+
+            <div className="flex items-center gap-4 justify-around">
+              {/* Origem */}
+              <div className="lg:col-span-3">
+                <Label htmlFor="origin" className="text-sm mb-1 flex items-center gap-2 text-gray-700">
+                  <MapPin className="w-4 h-4 text-[--primary]" />
+                  Origem
+                </Label>
+                <Input
+                  id="origin"
+                  placeholder="Origem"
+                  value={origin}
+                  onChange={(e) => setOrigin(e.target.value)}
+                  className="rounded-xl border border-gray-300 h-12 px-3 bg-white"
+                />
+              </div>
+
               {/* Destino */}
-              <div className="lg:col-span-2">
-                <Label htmlFor="destination" className="text-sm mb-2 flex items-center gap-2 text-gray-700">
+              <div className="lg:col-span-3">
+                <Label htmlFor="destination" className="text-sm mb-1 flex items-center gap-2 text-gray-700">
                   <MapPin className="w-4 h-4 text-[--primary]" />
                   Destino
                 </Label>
                 <Select value={destination} onValueChange={setDestination}>
-                  <SelectTrigger id="destination" className="rounded-xl border-gray-300">
-                    <SelectValue placeholder="Selecione o destino" />
+                  <SelectTrigger id="destination" className="rounded-xl border border-gray-300 h-12 px-3 bg-white">
+                    <SelectValue placeholder="Destino" />
                   </SelectTrigger>
                   <SelectContent>
                     {destinations.map((dest) => (
@@ -154,88 +171,68 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
               </div>
 
               {/* Check-in */}
-              <div>
-                <Label htmlFor="checkin" className="text-sm mb-2 flex items-center gap-2 text-gray-700">
+              <div className="lg:col-span-2">
+                <Label htmlFor="checkin" className="text-sm mb-1 flex items-center gap-2 text-gray-700">
                   <Calendar className="w-4 h-4 text-[--primary]" />
-                  Check-in
+                  Início
                 </Label>
                 <Input
                   id="checkin"
                   type="date"
                   value={checkIn}
                   onChange={(e) => setCheckIn(e.target.value)}
-                  className="rounded-xl border-gray-300"
+                  className="rounded-xl border border-gray-300 h-12 px-3 bg-white"
                   min={new Date().toISOString().split('T')[0]}
                 />
               </div>
 
               {/* Check-out */}
-              <div>
-                <Label htmlFor="checkout" className="text-sm mb-2 flex items-center gap-2 text-gray-700">
+              <div className="lg:col-span-2">
+                <Label htmlFor="checkout" className="text-sm mb-1 flex items-center gap-2 text-gray-700">
                   <Calendar className="w-4 h-4 text-[--primary]" />
-                  Check-out
+                  Fim
                 </Label>
                 <Input
                   id="checkout"
                   type="date"
                   value={checkOut}
                   onChange={(e) => setCheckOut(e.target.value)}
-                  className="rounded-xl border-gray-300"
+                  className="rounded-xl border border-gray-300 h-12 px-3 bg-white"
                   min={checkIn || new Date().toISOString().split('T')[0]}
                 />
               </div>
 
-              {/* Adultos */}
-              <div>
-                <Label htmlFor="adults-home" className="text-sm mb-2 flex items-center gap-2 text-gray-700">
+              {/* Passageiros / Classe */}
+              <div className="lg:col-span-2">
+                <Label htmlFor="passengers" className="text-sm mb-1 flex items-center gap-2 text-gray-700">
                   <Users className="w-4 h-4 text-[--primary]" />
-                  Adultos
+                  Passageiros
                 </Label>
                 <Select value={adults} onValueChange={setAdults}>
-                  <SelectTrigger id="adults-home" className="rounded-xl border-gray-300">
+                  <SelectTrigger id="passengers" className="rounded-xl border border-gray-300 h-12 px-3 bg-white">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+                    {[1, 2, 3, 4, 5, 6].map((num) => (
                       <SelectItem key={num} value={num.toString()}>
-                        {num}
+                        {num} viajante(s)
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
 
-              {/* Crianças */}
-              <div>
-                <Label htmlFor="children-home" className="text-sm mb-2 flex items-center gap-2 text-gray-700">
-                  <Baby className="w-4 h-4 text-[--primary]" />
-                  Crianças
-                </Label>
-                <Select value={children} onValueChange={setChildren}>
-                  <SelectTrigger id="children-home" className="rounded-xl border-gray-300">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {[0, 1, 2, 3, 4, 5, 6].map((num) => (
-                      <SelectItem key={num} value={num.toString()}>
-                        {num}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+              {/* Buscar Button */}
+              <div className="lg:col-span-2">
+                <Button
+                  onClick={handleSearch}
+                  size="lg"
+                  className="bg-blue-900 hover:bg-blue-800 text-white rounded-xl w-full h-12 flex items-center justify-center"
+                >
+                  <Search className="w-5 h-5 mr-2" />
+                  Buscar
+                </Button>
               </div>
-            </div>
-
-            {/* Botão de Busca */}
-            <div className="mt-6 text-center">
-              <Button
-                onClick={handleSearch}
-                size="lg"
-                className="bg-[--secondary] hover:bg-[--primary] text-white rounded-full px-12"
-              >
-                <Search className="w-5 h-5 mr-2" />
-                Buscar
-              </Button>
             </div>
           </div>
         </div>
@@ -261,7 +258,7 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                     <h3 className="text-white mb-2">{dest.name}</h3>
                     <p className="text-sm text-gray-200 mb-4">{dest.description}</p>
-                    <Button 
+                    <Button
                       onClick={() => onNavigate('viagens')}
                       className="bg-[--secondary] hover:bg-[--primary] text-white rounded-full"
                     >
@@ -295,7 +292,7 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                     <h3 className="text-white mb-2">{dest.name}</h3>
                     <p className="text-sm text-gray-200 mb-4">{dest.description}</p>
-                    <Button 
+                    <Button
                       onClick={() => onNavigate('viagens')}
                       className="bg-[--secondary] hover:bg-[--primary] text-white rounded-full"
                     >
@@ -310,7 +307,7 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
       </section>
 
       {/* Newsletter Section */}
-      <section 
+      <section
         className="py-20 relative bg-cover bg-center"
         style={{
           backgroundImage: `linear-gradient(rgba(23, 38, 79, 0.85), rgba(23, 38, 79, 0.85)), url('https://images.unsplash.com/photo-1673515335048-ace62cf73a26?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuZXdzbGV0dGVyJTIwdHJhdmVsJTIwYmFja2dyb3VuZHxlbnwxfHx8fDE3NjA4MDc2NzR8MA&ixlib=rb-4.1.0&q=80&w=1080')`,
@@ -457,8 +454,8 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {galleryImages.map((img, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="relative overflow-hidden rounded-2xl shadow-lg cursor-pointer group"
               >
                 <ImageWithFallback

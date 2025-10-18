@@ -30,10 +30,10 @@ export function Header({ currentPage, onNavigate }: HeaderProps) {
   ];
 
   return (
-    <header className="bg-transparent sticky top-0 z-50">
+    <header className="bg-transparent sticky top-0 z-50 h-20">
       {/* Top thin bar: contacts left, hours center, socials right */}
-      <div className="bg-white/90 border-b text-sm">
-        <div className="container mx-auto px-4 flex items-center justify-between h-9">
+      <div className="bg-white border-b text-sm mx-auto max-w-6xl">
+        <div className="mx-auto px-4 flex items-center justify-between h-16 max-w-6xl">
           <div className="flex items-center gap-4 text-xs text-[--muted]">
             <a href="mailto:contato@stellabraga.com.br" className="flex items-center gap-2 hover:text-[--accent] transition-colors">
               <Mail className="w-4 h-4" />
@@ -67,8 +67,13 @@ export function Header({ currentPage, onNavigate }: HeaderProps) {
               <span className="text-white text-lg font-bold">SB</span>
             </div>
             <div className="flex flex-col leading-tight">
-              <span className="text-[--primary] font-extrabold text-lg">Stella Braga</span>
-              <span className="text-[--secondary] text-sm">Turismo</span>
+              <img
+                src="./logo.png"
+                alt="Stella Braga Turismo"
+                width={200}
+                height={40}
+                className="h-auto"
+              />
             </div>
           </button>
 
