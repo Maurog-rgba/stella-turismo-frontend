@@ -138,7 +138,7 @@ export function TravelSearch({ onSearch }: TravelSearchProps) {
             <Button
               onClick={handleSearch}
               size="lg"
-              className="bg-gradient-to-r from-primary to-secondary hover:from-[#5fa22d] hover:to-[#7ac143] text-white rounded-md px-8 h-12 w-full md:w-auto shadow-lg transition-all duration-200"
+              className="bg-primary text-white rounded-md px-8 h-12 w-full md:w-auto shadow-lg transition-all duration-200"
               style={{ boxShadow: '0 4px 16px 0 rgba(122,193,67,0.15)' }}
             >
               PESQUISAR
