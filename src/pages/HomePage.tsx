@@ -111,13 +111,12 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative py-16" style={{
-        background: `linear-gradient(var(--primary) 0%, var(--secondary) 100%)`,
+        background: `var(--secondary)`,
       }}>
         <div className="container mx-auto text-center">
-          <h1 className="font-extrabold my-6 text-3xl md:text-4xl lg:text-5xl text-primary-100">
-            A viagem dos seus sonhos!
+          <h1 className="text-white font-semibold my-6 text-xl md:text-2xl lg:text-3xl text-primary-100">
+            Promoção em viagens para o mundo todo!
           </h1>
-          <p className="text-blue-800 mb-6 max-w-2xl mx-auto">Encontre passagens, pacotes e promoções com facilidade.</p>
         </div>
 
         {/* Search Card */}
