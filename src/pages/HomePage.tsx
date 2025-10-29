@@ -1,18 +1,12 @@
-import { ArrowRight, Calendar, Mail, MapPin, Search, Users } from 'lucide-react';
+import { ArrowRight, Mail } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { PackageCard } from '../components/PackageCard';
+import { TravelSearch } from '../components/TravelSearch';
 import { Button } from '../components/ui/button';
 import { ImageWithFallback } from '../components/ui/ImageWithFallback';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '../components/ui/select';
 import { blogPosts, packages } from '../data/mockData';
 
 interface HomePageProps {
@@ -116,126 +110,18 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-primary text-primary py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="font-extrabold mb-6 text-3xl md:text-4xl lg:text-5xl">
+      <section className="relative py-16" style={{
+        background: `linear-gradient(var(--primary) 0%, var(--secondary) 100%)`,
+      }}>
+        <div className="container mx-auto text-center">
+          <h1 className="font-extrabold my-6 text-3xl md:text-4xl lg:text-5xl text-primary-100">
             A viagem dos seus sonhos!
           </h1>
           <p className="text-blue-800 mb-6 max-w-2xl mx-auto">Encontre passagens, pacotes e promoções com facilidade.</p>
         </div>
 
         {/* Search Card */}
-        <div className="container mx-auto px-4 mt-4">
-          <div className="bg-white rounded-3xl shadow-2xl p-3 md:p-4 max-w-6xl mx-auto">
-            {/* Tabs (Ida e volta / Só ida / Vários destinos) */}
-            {/* <div className="flex items-center gap-2 mb-3">
-              <button className="px-3 py-1.5 rounded-full bg-blue-900 text-white text-sm">Ida e volta</button>
-              <button className="px-3 py-1.5 rounded-full border border-gray-200 text-sm">Só ida</button>
-              <button className="px-3 py-1.5 rounded-full border border-gray-200 text-sm">Vários destinos</button>
-            </div> */}
-
-            <div className="flex items-center gap-4 justify-around">
-              {/* Origem */}
-              <div className="lg:col-span-3">
-                <Label htmlFor="origin" className="text-sm mb-1 flex items-center gap-2 text-gray-700">
-                  <MapPin className="w-4 h-4 text-[--primary]" />
-                  Origem
-                </Label>
-                <Input
-                  id="origin"
-                  placeholder="Origem"
-                  value={origin}
-                  onChange={(e) => setOrigin(e.target.value)}
-                  className="rounded-xl border border-gray-300 h-12 px-3 bg-white"
-                />
-              </div>
-
-              {/* Destino */}
-              <div className="lg:col-span-3">
-                <Label htmlFor="destination" className="text-sm mb-1 flex items-center gap-2 text-gray-700">
-                  <MapPin className="w-4 h-4 text-[--primary]" />
-                  Destino
-                </Label>
-                <Select value={destination} onValueChange={setDestination}>
-                  <SelectTrigger id="destination" className="rounded-xl border border-gray-300 h-12 px-3 bg-white">
-                    <SelectValue placeholder="Destino" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {destinations.map((dest) => (
-                      <SelectItem key={dest} value={dest}>
-                        {dest}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Check-in */}
-              <div className="lg:col-span-2">
-                <Label htmlFor="checkin" className="text-sm mb-1 flex items-center gap-2 text-gray-700">
-                  <Calendar className="w-4 h-4 text-[--primary]" />
-                  Início
-                </Label>
-                <Input
-                  id="checkin"
-                  type="date"
-                  value={checkIn}
-                  onChange={(e) => setCheckIn(e.target.value)}
-                  className="rounded-xl border border-gray-300 h-12 px-3 bg-white"
-                  min={new Date().toISOString().split('T')[0]}
-                />
-              </div>
-
-              {/* Check-out */}
-              <div className="lg:col-span-2">
-                <Label htmlFor="checkout" className="text-sm mb-1 flex items-center gap-2 text-gray-700">
-                  <Calendar className="w-4 h-4 text-[--primary]" />
-                  Fim
-                </Label>
-                <Input
-                  id="checkout"
-                  type="date"
-                  value={checkOut}
-                  onChange={(e) => setCheckOut(e.target.value)}
-                  className="rounded-xl border border-gray-300 h-12 px-3 bg-white"
-                  min={checkIn || new Date().toISOString().split('T')[0]}
-                />
-              </div>
-
-              {/* Passageiros / Classe */}
-              <div className="lg:col-span-2">
-                <Label htmlFor="passengers" className="text-sm mb-1 flex items-center gap-2 text-gray-700">
-                  <Users className="w-4 h-4 text-[--primary]" />
-                  Passageiros
-                </Label>
-                <Select value={adults} onValueChange={setAdults}>
-                  <SelectTrigger id="passengers" className="rounded-xl border border-gray-300 h-12 px-3 bg-white">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {[1, 2, 3, 4, 5, 6].map((num) => (
-                      <SelectItem key={num} value={num.toString()}>
-                        {num} viajante(s)
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Buscar Button */}
-              <div className="lg:col-span-2">
-                <Button
-                  onClick={handleSearch}
-                  size="lg"
-                  className="bg-blue-900 hover:bg-blue-800 text-white rounded-xl w-full h-12 flex items-center justify-center"
-                >
-                  <Search className="w-5 h-5 mr-2" />
-                  Buscar
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <TravelSearch />
       </section>
 
       {/* Destinos Internacionais */}
