@@ -1,6 +1,7 @@
 import { ArrowRight, Mail } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { FeaturedSectionCard } from '../components/FeaturedSectionCard';
 import { PackageCard } from '../components/PackageCard';
 import { TravelSearch } from '../components/TravelSearch';
 import { Button } from '../components/ui/button';
@@ -111,10 +112,10 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative py-16" style={{
-        background: `var(--secondary)`,
+        background: 'linear-gradient(45deg, var(--primary) 15%, var(--accent) 15%, var(--accent) 70%, var(--secondary) 70%)',
       }}>
         <div className="container mx-auto text-center">
-          <h1 className="text-white font-semibold my-6 text-xl md:text-2xl lg:text-3xl text-primary-100">
+          <h1 className="text-[var(--primary)] font-bold my-6 text-xl md:text-2xl lg:text-3xl text-accent-100">
             Promoção em viagens para o mundo todo!
           </h1>
         </div>
@@ -123,70 +124,84 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
         <TravelSearch />
       </section>
 
-      {/* Destinos Internacionais */}
+      {/* Destinos Internacionais - Novo Layout */}
       <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2>Destinos Internacionais</h2>
+        <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 px-4">
+          {/* Lado esquerdo: destaque visual e texto */}
+          <div className="flex-1 flex flex-col items-start justify-center mb-8 md:mb-0 md:pr-8">
+            <div className="mb-6">
+              {/* Ícone ilustrativo */}
+              <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="14" cy="14" r="14" fill="#FFEB3B" />
+                <rect x="18" y="18" width="32" height="24" rx="8" stroke="var(--accent)" strokeWidth="3" fill="white" />
+                <rect x="24" y="24" width="20" height="16" rx="6" stroke="var(--accent)" strokeWidth="2" fill="white" />
+              </svg>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-black leading-tight">
+              Encontre <span className="text-[var(--accent)]">ofertas</span><br /> ideais para sua viagem
+            </h2>
+            <p className="text-gray-500 mb-4">Saindo de <span className="text-[var(--accent)]">São Paulo</span></p>
+            <span className="text-xs text-gray-400 mt-2">*Taxas de embarque serão cobradas na primeira parcela</span>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {internationalDestinations.map((dest) => (
-              <div key={dest.id} className="group cursor-pointer">
-                <div className="relative overflow-hidden rounded-2xl shadow-lg transition-transform duration-300 group-hover:scale-105">
-                  <ImageWithFallback
-                    src={dest.image}
-                    alt={dest.name}
-                    className="w-full h-80 object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                    <h3 className="text-white mb-2">{dest.name}</h3>
-                    <p className="text-sm text-gray-200 mb-4">{dest.description}</p>
-                    <Button
-                      onClick={() => onNavigate('viagens')}
-                      className="bg-[--secondary] hover:bg-[--primary] text-white rounded-full"
-                    >
-                      Saiba mais
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            ))}
+          {/* Lado direito: carrossel de cards */}
+          <div className="flex-2 w-full overflow-x-auto">
+            <div className="flex flex-row gap-6 min-w-[400px] md:min-w-[600px] lg:min-w-[800px]">
+              {internationalDestinations.map((dest) => (
+                <FeaturedSectionCard
+                  key={dest.id}
+                  image={dest.image}
+                  title={`${dest.name} | 4 dias`}
+                  subtitle="Saindo de São Paulo"
+                  dateStart="01/12/2025"
+                  dateEnd="05/12/2025"
+                  priceLabel="A partir de"
+                  priceValue="R$ 1.999"
+                  priceInstallment="Em até 12x sem juros"
+                  icon={<svg width="20" height="20" fill="none" stroke="var(--accent)" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="4" /><rect x="7" y="3" width="10" height="8" rx="4" /></svg>}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Destinos Nacionais */}
+      {/* Destinos Nacionais - Novo Layout */}
       <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2>Destinos Nacionais</h2>
+        <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 px-4">
+          {/* Lado esquerdo: carrossel de cards */}
+          <div className="flex-2 w-full overflow-x-auto order-2 md:order-1">
+            <div className="flex flex-row gap-6 min-w-[400px] md:min-w-[600px] lg:min-w-[800px]">
+              {nationalDestinations.map((dest, idx) => (
+                <FeaturedSectionCard
+                  key={dest.id}
+                  image={dest.image}
+                  title={dest.name}
+                  subtitle="Saindo de São Paulo"
+                  dateStart="29/11/2025"
+                  dateEnd="06/12/2025"
+                  priceLabel="Ida e volta"
+                  priceValue={idx === 0 ? '4x de R$ 154' : idx === 1 ? '10x de R$ 73' : '10x de R$ 107'}
+                  priceInstallment={`A partir de R$ ${idx === 0 ? '616' : idx === 1 ? '725' : '1.068'}`}
+                  icon={<svg width="20" height="20" fill="none" stroke="var(--accent)" strokeWidth="2" viewBox="0 0 24 24"><path d="M2 16l20-5-8.5-2.5L12 2l-1.5 6.5L2 16z" /><circle cx="12" cy="19" r="2" /></svg>}
+                />
+              ))}
+            </div>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {nationalDestinations.map((dest) => (
-              <div key={dest.id} className="group cursor-pointer">
-                <div className="relative overflow-hidden rounded-2xl shadow-lg transition-transform duration-300 group-hover:scale-105">
-                  <ImageWithFallback
-                    src={dest.image}
-                    alt={dest.name}
-                    className="w-full h-80 object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                    <h3 className="text-white mb-2">{dest.name}</h3>
-                    <p className="text-sm text-gray-200 mb-4">{dest.description}</p>
-                    <Button
-                      onClick={() => onNavigate('viagens')}
-                      className="bg-[--secondary] hover:bg-[--primary] text-white rounded-full"
-                    >
-                      Saiba mais
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            ))}
+          {/* Lado direito: destaque visual e texto */}
+          <div className="flex-1 flex flex-col items-start justify-center mb-8 md:mb-0 md:pl-8 order-1 md:order-2">
+            <div className="mb-6">
+              {/* Ícone ilustrativo */}
+              <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="42" cy="14" r="14" fill="#FFEB3B" />
+                <path d="M10 38l36-8-12-4-2-8-4 8-12 4z" stroke="var(--accent)" strokeWidth="3" fill="white" />
+                <path d="M28 44a4 4 0 100-8 4 4 0 000 8z" stroke="var(--accent)" strokeWidth="2" fill="white" />
+              </svg>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-black leading-tight">
+              <span className="text-(--accent)">Os melhores</span> preços<br />
+            </h2>
+            <p className="text-gray-500 mb-4">Saindo de <span className="text-(--accent) underline cursor-pointer">São Paulo <span className="align-middle">▼</span></span></p>
+            <span className="text-xs text-gray-400 mt-2">*Taxas de embarque serão cobradas na primeira parcela</span>
           </div>
         </div>
       </section>
@@ -227,7 +242,7 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
                   <Button
                     type="submit"
                     size="lg"
-                    className="w-full bg-[--secondary] hover:bg-[--primary] text-white rounded-full"
+                    className="w-full bg-[--secondary] hover:bg-[--accent] text-white rounded-full"
                   >
                     <Mail className="w-5 h-5 mr-2" />
                     Quero receber ofertas
@@ -239,35 +254,44 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
         </div>
       </section>
 
-      {/* Planeje sua viagem - Pacotes */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2>Planeje sua viagem</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Pacotes completos com os melhores preços e condições especiais
+      {/* Pacotes em destaque - Comercial */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 px-4">
+          {/* Lado esquerdo: texto comercial e destaque visual */}
+          <div className="flex-1 flex flex-col items-start justify-center mb-12 md:mb-0 md:pr-12">
+            <div className="mb-6">
+              <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="8" y="16" width="40" height="28" rx="10" fill="var(--accent)" fillOpacity="0.08" />
+                <rect x="14" y="22" width="28" height="16" rx="8" stroke="var(--accent)" strokeWidth="3" fill="white" />
+                <circle cx="44" cy="16" r="6" fill="#FFEB3B" />
+              </svg>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-black leading-tight">
+              <span className="text-(--accent)">Pacotes exclusivos</span> para sua próxima viagem
+            </h2>
+            <p className="text-gray-600 text-lg mb-6 max-w-md">
+              Descubra ofertas imperdíveis, roteiros completos e condições especiais para transformar seu sonho em realidade. Reserve agora e viaje com tranquilidade!
             </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-            {packages.slice(0, 6).map((pkg) => (
-              <PackageCard
-                key={pkg.id}
-                {...pkg}
-                onRequestQuote={onRequestQuote}
-              />
-            ))}
-          </div>
-
-          <div className="text-center">
             <Button
               onClick={() => onNavigate('viagens')}
               size="lg"
-              className="bg-[--secondary] hover:bg-[--primary] text-white rounded-full px-8"
+              className="bg-(--accent) hover:bg-(--accent)/80 text-white rounded-full px-10 py-6 text-lg font-bold shadow-xl transition-all duration-200"
             >
               Ver todos os pacotes
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
+          </div>
+          {/* Lado direito: cards de pacotes */}
+          <div className="flex-[2] w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+              {packages.slice(0, 6).map((pkg) => (
+                <PackageCard
+                  key={pkg.id}
+                  {...pkg}
+                  onRequestQuote={onRequestQuote}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -357,7 +381,7 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
             <Button
               onClick={() => onNavigate('galeria')}
               size="lg"
-              className="bg-[--secondary] hover:bg-[--primary] text-white rounded-full px-8"
+              className="bg-[--secondary] hover:bg-[--accent] text-white rounded-full px-8"
             >
               Ver galeria completa
               <ArrowRight className="ml-2 w-5 h-5" />
@@ -367,7 +391,7 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
       </section>
 
       {/* CTA Final */}
-      <section className="py-20 bg-gradient-to-r from-[--primary] to-[--secondary] text-white">
+      <section className="py-20 bg-gradient-to-r from-[--accent] to-[--secondary] text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-white mb-6">Pronto para Sua Próxima Aventura?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-100">
