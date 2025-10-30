@@ -1,5 +1,5 @@
-import { Facebook, Instagram, Mail, Menu, Phone, X, Youtube } from 'lucide-react';
-import { useState } from 'react';
+import { Gift, HelpCircle, Phone, User } from "lucide-react";
+import { useState } from "react";
 
 interface HeaderProps {
   currentPage: string;
@@ -8,169 +8,163 @@ interface HeaderProps {
 
 export function Header({ currentPage, onNavigate }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [viagensOpen, setViagensOpen] = useState(false);
 
-  const menuItems = [
-    { id: 'home', label: 'Home' },
-    {
-      id: 'viagens',
-      label: 'Viagens',
-      children: [
-        { id: 'nacionais', label: 'Nacionais' },
-        { id: 'internacionais', label: 'Internacionais' },
-        { id: 'pacotes', label: 'Pacotes' },
-      ],
-    },
-    { id: 'grupos', label: 'Grupos e Bloqueios' },
-    { id: 'corporativo', label: 'Corporativo' },
-    { id: 'galeria', label: 'Galeria' },
-    { id: 'blog', label: 'Blog' },
-    { id: 'sobre', label: 'Quem Somos' },
-    { id: 'contato', label: 'Contato' },
+  const menuIcons = {
+    hospedagens: (
+      <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+        <rect x="3" y="10" width="18" height="10" rx="2" />
+        <path d="M7 10V7a5 5 0 0110 0v3" />
+      </svg>
+    ),
+    passagens: (
+      <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+        <path d="M2 16l20-5-8.5-2.5L12 2l-1.5 6.5L2 16z" />
+        <circle cx="12" cy="19" r="2" />
+      </svg>
+    ),
+    pacotes: (
+      <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+        <rect x="3" y="7" width="18" height="13" rx="4" />
+        <rect x="7" y="3" width="10" height="8" rx="4" />
+      </svg>
+    ),
+    ofertas: (
+      <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+        <path d="M12 2v20M2 12h20" />
+      </svg>
+    ),
+    prontos: (
+      <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+        <rect x="4" y="4" width="16" height="16" rx="4" />
+      </svg>
+    ),
+    alugueis: (
+      <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+        <rect x="3" y="11" width="18" height="7" rx="2" />
+        <path d="M7 11V7a5 5 0 0110 0v4" />
+      </svg>
+    ),
+    passeios: (
+      <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 6v6l4 2" />
+      </svg>
+    ),
+    carros: (
+      <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+        <rect x="3" y="11" width="18" height="6" rx="2" />
+        <circle cx="7" cy="17" r="2" />
+        <circle cx="17" cy="17" r="2" />
+      </svg>
+    ),
+    disney: (
+      <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+        <circle cx="8" cy="8" r="4" />
+        <circle cx="16" cy="8" r="4" />
+        <circle cx="12" cy="16" r="6" />
+      </svg>
+    ),
+    universal: (
+      <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M2 12h20" />
+      </svg>
+    ),
+    cruzeiros: (
+      <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+        <rect x="4" y="14" width="16" height="6" rx="3" />
+        <path d="M4 14l8-8 8 8" />
+      </svg>
+    ),
+    seguros: (
+      <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+        <rect x="4" y="4" width="16" height="16" rx="8" />
+        <path d="M8 12l2 2 4-4" />
+      </svg>
+    ),
+    transfers: (
+      <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+        <path d="M4 12h16M4 12l4-4M4 12l4 4" />
+      </svg>
+    ),
+  };
+
+  const mainMenu = [
+    { id: "hospedagens", label: "Hospedagens", icon: menuIcons.hospedagens },
+    { id: "passagens", label: "Passagens", icon: menuIcons.passagens },
+    { id: "pacotes", label: "Pacotes", icon: menuIcons.pacotes },
+    { id: "ofertas", label: "Ofertas", icon: menuIcons.ofertas },
+    { id: "prontos", label: "Pacotes prontos", icon: menuIcons.prontos },
+    { id: "alugueis", label: "Aluguéis", icon: menuIcons.alugueis },
+    { id: "passeios", label: "Passeios", icon: menuIcons.passeios },
+    { id: "carros", label: "Carros", icon: menuIcons.carros },
+    { id: "disney", label: "Disney", icon: menuIcons.disney },
+    { id: "universal", label: "Universal", icon: menuIcons.universal },
+    { id: "cruzeiros", label: "Cruzeiros", icon: menuIcons.cruzeiros },
+    { id: "seguros", label: "Seguros", icon: menuIcons.seguros },
+    { id: "transfers", label: "Transfers", icon: menuIcons.transfers },
   ];
 
   return (
-    <header className="bg-transparent sticky top-0 z-50 h-20">
-      {/* Top thin bar: contacts left, hours center, socials right */}
-      <div className="bg-white border-b text-sm mx-auto max-w-6xl">
-        <div className="mx-auto px-4 flex items-center justify-between h-16 max-w-6xl">
-          <div className="flex items-center gap-4 text-xs text-[--muted]">
-            <a href="mailto:contato@stellabraga.com.br" className="flex items-center gap-2 hover:text-[--accent] transition-colors">
-              <Mail className="w-4 h-4" />
-              <span className="hidden sm:inline">contato@stellabraga.com.br</span>
-            </a>
-            <a href="tel:+5511999999999" className="flex items-center gap-2 hover:text-[--accent] transition-colors">
-              <Phone className="w-4 h-4" />
-              <span className="hidden sm:inline">(11) 99999-9999</span>
-            </a>
-          </div>
-
-          <div className="hidden sm:block text-[--muted] text-xs">Seg - Sex: 9h às 18h | Sáb: 9h às 13h</div>
-
-          <div className="flex items-center gap-3 text-[--primary]">
-            <a href="#" aria-label="Facebook" className="hover:text-[--accent] transition-colors"><Facebook className="w-4 h-4" /></a>
-            <a href="#" aria-label="Instagram" className="hover:text-[--accent] transition-colors"><Instagram className="w-4 h-4" /></a>
-            <a href="#" aria-label="YouTube" className="hover:text-[--accent] transition-colors"><Youtube className="w-4 h-4" /></a>
-          </div>
+    <header className="bg-white shadow-sm border-b sticky top-0 z-50">
+      {/* Top bar */}
+      <div className="flex items-center justify-between px-10 py-2 bg-[var(--primary)] text-white text-sm">
+        <div className="flex items-center gap-2">
+          <Phone className="w-4 h-4" />
+          <span>
+            Televendas <strong>0800 883 6342</strong>
+          </span>
+        </div>
+        <div className="flex items-center gap-6 text-gray-200">
+          <button className="flex items-center gap-2 hover:text-white transition">
+            <HelpCircle className="w-4 h-4" /> Ajuda
+          </button>
+          <button className="flex items-center gap-2 hover:text-white transition">
+            <User className="w-4 h-4" /> Minhas Viagens
+          </button>
+          <button className="flex items-center gap-1 hover:text-white transition">
+            <Gift className="w-4 h-4" /> Benefícios Passaporte
+          </button>
         </div>
       </div>
 
-      {/* Centered white nav card */}
-      <div className="container mx-auto px-4 -mt-6">
-        <div className="mx-auto max-w-6xl bg-white rounded-lg shadow-lg py-4 px-6 flex items-center justify-between">
-          {/* Logo */}
-          <button
-            onClick={() => onNavigate('home')}
-            className="flex items-center gap-3 hover:opacity-90 transition-opacity"
-          >
-            <div className="w-14 h-14 bg-[--primary] rounded-full flex items-center justify-center">
-              <span className="text-white text-lg font-bold">SB</span>
-            </div>
-            <div className="flex flex-col leading-tight">
-              <img
-                src="./logo.png"
-                alt="Stella Braga Turismo"
-                width={200}
-                height={40}
-                className="h-auto"
-              />
-            </div>
-          </button>
+      {/* Logo + menu */}
+      <div className="flex flex-col items-center bg-white pt-4">
+        {/* Logo */}
+        <button onClick={() => onNavigate("home")} className="flex items-center gap-2 mb-2">
+          <img
+            src="./logo.png"
+            alt="Stella Braga Turismo"
+            width={200}
+            height={40}
+            className="h-auto"
+          />
+        </button>
 
-          {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-6">
-            {menuItems.map((item) => (
-              <div key={item.id} className={`relative ${item.children ? 'group' : ''}`}>
+        {/* Menu */}
+        <nav className="w-full flex justify-center border-t border-gray-200 mt-3 pt-3 pb-2">
+          <ul className="flex gap-8">
+            {mainMenu.map((item) => (
+              <li key={item.id} className="flex flex-col items-center">
                 <button
-                  onClick={() => {
-                    if (item.children) {
-                      setViagensOpen((s) => !s);
-                    } else {
-                      onNavigate(item.id);
-                    }
-                  }}
-                  onMouseEnter={() => item.children && setViagensOpen(true)}
-                  onMouseLeave={() => item.children && setViagensOpen(false)}
-                  className={`hover:text-[--secondary] transition-colors ${currentPage === item.id ? 'text-[--primary] font-semibold' : 'text-[--base-content]'} flex items-center gap-2`}
+                  onClick={() => onNavigate(item.id)}
+                  className={`flex flex-col items-center ${currentPage === item.id
+                    ? "text-white bg-[#3D0BEB] rounded-full p-2 shadow-md"
+                    : "text-gray-600 hover:text-[#3D0BEB]"
+                    } transition-all`}
+                >
+                  {item.icon}
+                </button>
+                <span
+                  className={`text-xs mt-1 ${currentPage === item.id ? "text-[#3D0BEB] font-semibold" : "text-gray-700"
+                    }`}
                 >
                   {item.label}
-                  {item.children && <svg className="w-3 h-3" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.27a.75.75 0 01.02-1.06z" clipRule="evenodd" /></svg>}
-                </button>
-
-                {item.children && (
-                  <div
-                    onMouseEnter={() => setViagensOpen(true)}
-                    onMouseLeave={() => setViagensOpen(false)}
-                    className={`absolute left-0 mt-2 w-48 bg-white border rounded-md shadow-md py-2 z-50 ${viagensOpen ? 'block' : 'hidden'}`}
-                  >
-                    {item.children.map((child) => (
-                      <button
-                        key={child.id}
-                        onClick={() => onNavigate(child.id)}
-                        className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50"
-                      >
-                        {child.label}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
+                </span>
+              </li>
             ))}
-          </nav>
-
-          {/* Mobile menu button */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              aria-label="Abrir menu"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Navigation (full width under the card) */}
-        {mobileMenuOpen && (
-          <nav className="lg:hidden mt-3 px-2 pb-4 flex flex-col gap-2">
-            {menuItems.map((item) => (
-              <div key={item.id}>
-                <button
-                  onClick={() => {
-                    if (item.children) {
-                      // expand/collapse mobile submenu by toggling viagensOpen
-                      setViagensOpen((s) => !s);
-                    } else {
-                      onNavigate(item.id);
-                      setMobileMenuOpen(false);
-                    }
-                  }}
-                  className={`w-full text-left px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors ${currentPage === item.id ? 'bg-[--primary] text-white' : 'text-[--base-content]'}`}
-                >
-                  {item.label}
-                </button>
-
-                {item.children && viagensOpen && (
-                  <div className="pl-6">
-                    {item.children.map((child) => (
-                      <button
-                        key={child.id}
-                        onClick={() => {
-                          onNavigate(child.id);
-                          setMobileMenuOpen(false);
-                          setViagensOpen(false);
-                        }}
-                        className="w-full text-left px-4 py-2 rounded-lg hover:bg-gray-50 text-sm"
-                      >
-                        {child.label}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
-        )}
+          </ul>
+        </nav>
       </div>
     </header>
   );

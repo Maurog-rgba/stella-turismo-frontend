@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Mail, MapPin, Phone, Youtube, Clock } from 'lucide-react';
+import { Facebook, Instagram, Mail, MapPin, Phone, Youtube } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (page: string) => void;
@@ -6,218 +6,149 @@ interface FooterProps {
 
 export function Footer({ onNavigate }: FooterProps) {
   return (
-    <footer className="bg-[--neutral] text-white">
-      <div className="container mx-auto px-4 py-16">
+    <footer className="bg-[#333] text-gray-300 pt-16 pb-8">
+      <div className="container mx-auto px-6">
+        {/* Grid principal */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Sobre a Empresa */}
-          <div>
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-[--accent] rounded-full flex items-center justify-center">
-                <span className="text-[--neutral] font-bold text-xl">SB</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-white font-bold text-lg">Stella Braga</span>
-                <span className="text-sm text-gray-300">Turismo</span>
-              </div>
-            </div>
-            <p className="text-gray-300 text-sm leading-relaxed mb-6">
-              Realizando sonhos e criando memórias inesquecíveis há mais de 15 anos. Sua agência de confiança para experiências únicas de viagem.
+
+          {/* COLUNA 1 - LOGO E DESCRIÇÃO */}
+          <div className="flex flex-col">
+            <img
+              src="/logo.png"
+              alt="Stella Braga Turismo"
+              className="w-[220px] mb-6"
+            />
+            <p className="text-sm leading-relaxed text-gray-400 mb-8">
+              Viagens nacionais e internacionais, cooperativas ou a lazer, excursões terrestres,
+              pacotes aéreos, marítimos e fluviais, tudo com excelente custo-benefício.
             </p>
             <div className="flex gap-3">
-              <a 
-                href="https://facebook.com" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-[--primary] rounded-full flex items-center justify-center hover:bg-[--secondary] transition-all duration-300 hover:scale-110"
-                aria-label="Facebook"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a 
-                href="https://instagram.com" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-[--primary] rounded-full flex items-center justify-center hover:bg-[--secondary] transition-all duration-300 hover:scale-110"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a 
-                href="https://youtube.com" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-[--primary] rounded-full flex items-center justify-center hover:bg-[--secondary] transition-all duration-300 hover:scale-110"
-                aria-label="YouTube"
-              >
-                <Youtube className="w-5 h-5" />
-              </a>
+              {[
+                { icon: <Facebook className="w-5 h-5" />, href: "https://facebook.com" },
+                { icon: <Instagram className="w-5 h-5" />, href: "https://instagram.com" },
+                { icon: <Youtube className="w-5 h-5" />, href: "https://youtube.com" },
+              ].map(({ icon, href }, i) => (
+                <a
+                  key={i}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 border border-gray-600 flex items-center justify-center rounded hover:bg-[--accent] hover:text-white transition-colors"
+                >
+                  {icon}
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Links Rápidos */}
+          {/* COLUNA 2 - SERVIÇOS */}
           <div>
-            <h4 className="text-white font-semibold mb-6 text-lg">Links Rápidos</h4>
-            <ul className="space-y-3">
-              <li>
-                <button 
-                  onClick={() => onNavigate('home')} 
-                  className="text-gray-300 hover:text-[--accent] transition-colors duration-300 hover:translate-x-1 inline-block"
-                >
-                  → Home
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => onNavigate('viagens')} 
-                  className="text-gray-300 hover:text-[--accent] transition-colors duration-300 hover:translate-x-1 inline-block"
-                >
-                  → Viagens
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => onNavigate('grupos')} 
-                  className="text-gray-300 hover:text-[--accent] transition-colors duration-300 hover:translate-x-1 inline-block"
-                >
-                  → Grupos e Bloqueios
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => onNavigate('corporativo')} 
-                  className="text-gray-300 hover:text-[--accent] transition-colors duration-300 hover:translate-x-1 inline-block"
-                >
-                  → Corporativo
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => onNavigate('galeria')} 
-                  className="text-gray-300 hover:text-[--accent] transition-colors duration-300 hover:translate-x-1 inline-block"
-                >
-                  → Galeria
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => onNavigate('blog')} 
-                  className="text-gray-300 hover:text-[--accent] transition-colors duration-300 hover:translate-x-1 inline-block"
-                >
-                  → Blog
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => onNavigate('sobre')} 
-                  className="text-gray-300 hover:text-[--accent] transition-colors duration-300 hover:translate-x-1 inline-block"
-                >
-                  → Quem Somos
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => onNavigate('contato')} 
-                  className="text-gray-300 hover:text-[--accent] transition-colors duration-300 hover:translate-x-1 inline-block"
-                >
-                  → Contato
-                </button>
-              </li>
+            <h4 className="text-white text-lg font-semibold mb-6 tracking-wide">SERVIÇOS</h4>
+            <ul className="space-y-3 text-sm">
+              {[
+                "Assessoria Emissão Passaporte",
+                "Assessoria Emissão Visto",
+                "Pacotes de viagem",
+                "Passagens aéreas",
+                "Hotéis, Resorts e outros",
+                "Cruzeiros Marítimos",
+                "Traslados e transportes",
+                "Aluguel de veículos",
+                "Ingressos e shows",
+                "Eventos corporativos",
+              ].map((item, i) => (
+                <li key={i} className="flex items-center gap-2 hover:text-[--accent] transition">
+                  <span className="text-[--accent]">›</span> {item}
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Serviços */}
+          {/* COLUNA 3 - LINKS ÚTEIS */}
           <div>
-            <h4 className="text-white font-semibold mb-6 text-lg">Nossos Serviços</h4>
-            <ul className="space-y-3 text-gray-300">
-              <li className="flex items-start gap-2">
-                <span className="text-[--accent] mt-1">•</span>
-                <span>Pacotes Nacionais</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-[--accent] mt-1">•</span>
-                <span>Pacotes Internacionais</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-[--accent] mt-1">•</span>
-                <span>Viagens em Grupo</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-[--accent] mt-1">•</span>
-                <span>Bloqueios de Hotel</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-[--accent] mt-1">•</span>
-                <span>Turismo Corporativo</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-[--accent] mt-1">•</span>
-                <span>Eventos e Convenções</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-[--accent] mt-1">•</span>
-                <span>Assessoria Completa</span>
-              </li>
+            <h4 className="text-white text-lg font-semibold mb-6 tracking-wide">LINKS ÚTEIS</h4>
+            <ul className="space-y-3 text-sm">
+              {[
+                { label: "Home", page: "home" },
+                { label: "Grupos e Bloqueios", page: "grupos" },
+                { label: "Sobre", page: "sobre" },
+                { label: "Galeria de Fotos", page: "galeria" },
+                { label: "Blog", page: "blog" },
+                { label: "Contato", page: "contato" },
+              ].map((link, i) => (
+                <li key={i}>
+                  <button
+                    onClick={() => onNavigate(link.page)}
+                    className="hover:text-[--accent] transition-colors flex items-center gap-2"
+                  >
+                    <span className="text-[--accent]">›</span> {link.label}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Contato */}
+          {/* COLUNA 4 - CONTATO */}
           <div>
-            <h4 className="text-white font-semibold mb-6 text-lg">Entre em Contato</h4>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-gray-300">
-                <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0 text-[--accent]" />
-                <div>
-                  <p className="text-sm leading-relaxed">
-                    Rua Exemplo, 123<br />
-                    Centro - São Paulo, SP<br />
-                    CEP: 01000-000
-                  </p>
-                </div>
+            <h4 className="text-white text-lg font-semibold mb-6 tracking-wide">FALE CONOSCO</h4>
+            <ul className="space-y-4 text-sm">
+              <li className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-[--accent] flex-shrink-0" />
+                <p>
+                  Rua Padre Doutor Ramon Ortiz, 2326<br />
+                  Morada dos Nobres
+                </p>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 flex-shrink-0 text-[--accent]" />
-                <a 
-                  href="tel:+5511999999999" 
-                  className="text-gray-300 hover:text-[--accent] transition-colors duration-300"
-                >
-                  (11) 99999-9999
+                <Phone className="w-5 h-5 text-[--accent]" />
+                <a href="tel:+5512981390430" className="hover:text-[--accent]">
+                  (12) 98139-0430
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 flex-shrink-0 text-[--accent]" />
-                <a 
-                  href="mailto:contato@stellabraga.com.br" 
-                  className="text-gray-300 hover:text-[--accent] transition-colors duration-300 text-sm"
+                <Mail className="w-5 h-5 text-[--accent]" />
+                <a
+                  href="mailto:contato@stellaturismo.com.br"
+                  className="hover:text-[--accent]"
                 >
-                  contato@stellabraga.com.br
+                  contato@stellaturismo.com.br
                 </a>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <Clock className="w-5 h-5 mt-0.5 flex-shrink-0 text-[--accent]" />
-                <div className="text-sm">
-                  <p>Seg - Sex: 9h às 18h</p>
-                  <p>Sáb: 9h às 13h</p>
-                </div>
+              <li className="pt-2">
+                <img
+                  src="https://cadastur.turismo.gov.br/img/logo-cadastur.svg"
+                  alt="Cadastur"
+                  className="mt-4 w-[150px]"
+                />
+              </li>
+              <li>
+                <p className="text-xs text-gray-400">
+                  CNPJ 57.253.705/0001-38<br />Stella Braga Turismo
+                </p>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-gray-700 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
-            <p className="text-center md:text-left">
-              &copy; {new Date().getFullYear()} Stella Braga Turismo. Todos os direitos reservados.
-            </p>
-            <div className="flex gap-6 text-xs">
-              <button className="hover:text-[--accent] transition-colors">
-                Política de Privacidade
-              </button>
-              <button className="hover:text-[--accent] transition-colors">
-                Termos de Uso
-              </button>
-            </div>
-          </div>
+        {/* LINHA INFERIOR */}
+        <div className="border-t border-gray-700 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+          <p>
+            Copyright © {new Date().getFullYear()}{" "}
+            <span className="text-[--accent] hover:underline cursor-pointer">
+              Stella Braga turismo
+            </span>. Todos os direitos reservados.
+          </p>
+          <p className="text-xs mt-4 md:mt-0">
+            Desenvolvido por{" "}
+            <a
+              href="https://visiontaubate.com.br"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[--accent] hover:underline"
+            >
+              VisionTaubaté
+            </a>
+          </p>
         </div>
       </div>
     </footer>
