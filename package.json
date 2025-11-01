@@ -57,6 +57,12 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "dev:local": "npm run dev --configuration=local",
+    "dev:staging": "npm run dev --configuration=staging",
+    "dev:prod": "npm run dev --configuration=production",
+    "build": "vite build",
+    "build:local": "npm run build --configuration=local",
+    "build:staging": "npm run build --configuration=staging",
+    "build:prod": "npm run build --configuration=production"
   }
 }

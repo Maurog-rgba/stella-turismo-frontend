@@ -1,4 +1,4 @@
-import apiClient, { buildQuery, PaginatedParams } from './apiClient';
+import apiClient, { buildQuery, PaginatedParams } from "./apiClient";
 
 export interface AlbumSummary {
   id: number;
