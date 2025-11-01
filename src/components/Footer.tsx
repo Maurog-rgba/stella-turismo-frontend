@@ -93,7 +93,7 @@ export function Footer({ onNavigate }: FooterProps) {
             <h4 className="text-white text-lg font-semibold mb-6 tracking-wide">FALE CONOSCO</h4>
             <ul className="space-y-4 text-sm">
               <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-[--accent] flex-shrink-0" />
+                <MapPin className="w-5 h-5 text-[--accent] shrink-0" />
                 <p>
                   Rua Padre Doutor Ramon Ortiz, 2326<br />
                   Morada dos Nobres

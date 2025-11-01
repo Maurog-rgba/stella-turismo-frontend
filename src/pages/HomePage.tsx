@@ -1,7 +1,10 @@
 import { ArrowRight, Mail } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { FeaturedSectionCard } from '../components/FeaturedSectionCard';
+import 'swiper/css';
+import { Autoplay } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+// import { FeaturedSectionCard } from '../components/FeaturedSectionCard';
 import { PackageCard } from '../components/PackageCard';
 import { TravelSearch } from '../components/TravelSearch';
 import { Button } from '../components/ui/button';
@@ -108,100 +111,127 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
     'https://images.unsplash.com/photo-1513648197777-861864c16509?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyaW8lMjBkZSUyMGphbmVpcm8lMjBjaHJpc3QlMjByZWRlZW1lcnxlbnwxfHx8fDE3NjA4MDc2NzN8MA&ixlib=rb-4.1.0&q=80&w=1080',
   ];
 
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative py-16" style={{
         background: 'linear-gradient(45deg, var(--primary) 15%, var(--accent) 15%, var(--accent) 70%, var(--secondary) 70%)',
       }}>
-        <div className="container mx-auto text-center">
+        {/* <div className="container mx-auto text-center">
           <h1 className="text-[var(--primary)] font-bold my-6 text-xl md:text-2xl lg:text-3xl text-accent-100">
             Promoção em viagens para o mundo todo!
           </h1>
-        </div>
+        </div> */}
 
         {/* Search Card */}
         <TravelSearch />
       </section>
 
       {/* Destinos Internacionais - Novo Layout */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 px-4">
-          {/* Lado esquerdo: destaque visual e texto */}
-          <div className="flex-1 flex flex-col items-start justify-center mb-8 md:mb-0 md:pr-8">
-            <div className="mb-6">
-              {/* Ícone ilustrativo */}
-              <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="14" cy="14" r="14" fill="#FFEB3B" />
-                <rect x="18" y="18" width="32" height="24" rx="8" stroke="var(--accent)" strokeWidth="3" fill="white" />
-                <rect x="24" y="24" width="20" height="16" rx="6" stroke="var(--accent)" strokeWidth="2" fill="white" />
-              </svg>
+      <section className="py-16 bg-white w-full">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            {/* Lado esquerdo: destaque visual e texto */}
+            <div className="flex-1 flex flex-col items-start justify-center mb-8 md:mb-0 md:pr-8 min-w-[260px] max-w-xs">
+              <div className="mb-6">
+                {/* Ícone ilustrativo */}
+                <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="14" cy="14" r="14" fill="#FFEB3B" />
+                  <rect x="18" y="18" width="32" height="24" rx="8" stroke="var(--accent)" strokeWidth="3" fill="white" />
+                  <rect x="24" y="24" width="20" height="16" rx="6" stroke="var(--accent)" strokeWidth="2" fill="white" />
+                </svg>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-black leading-tight">
+                Encontre <span className="text-[var(--accent)]">ofertas</span><br /> ideais para sua viagem
+              </h2>
+              <p className="text-gray-500 mb-4">Saindo de <span className="text-[var(--accent)]">São Paulo</span></p>
+              <span className="text-xs text-gray-400 mt-2">*Taxas de embarque serão cobradas na primeira parcela</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-black leading-tight">
-              Encontre <span className="text-[var(--accent)]">ofertas</span><br /> ideais para sua viagem
-            </h2>
-            <p className="text-gray-500 mb-4">Saindo de <span className="text-[var(--accent)]">São Paulo</span></p>
-            <span className="text-xs text-gray-400 mt-2">*Taxas de embarque serão cobradas na primeira parcela</span>
-          </div>
-          {/* Lado direito: carrossel de cards */}
-          <div className="flex-2 w-full overflow-x-auto">
-            <div className="flex flex-row gap-6 min-w-[400px] md:min-w-[600px] lg:min-w-[800px]">
-              {internationalDestinations.map((dest) => (
-                <FeaturedSectionCard
-                  key={dest.id}
-                  image={dest.image}
-                  title={`${dest.name} | 4 dias`}
-                  subtitle="Saindo de São Paulo"
-                  dateStart="01/12/2025"
-                  dateEnd="05/12/2025"
-                  priceLabel="A partir de"
-                  priceValue="R$ 1.999"
-                  priceInstallment="Em até 12x sem juros"
-                  icon={<svg width="20" height="20" fill="none" stroke="var(--accent)" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="4" /><rect x="7" y="3" width="10" height="8" rx="4" /></svg>}
-                />
-              ))}
+            {/* Lado direito: carrossel de cards */}
+            <div className="w-full flex items-center justify-end">
+              <div className="flex-1 max-w-[800px] min-w-0">
+                <Swiper
+                  modules={[Autoplay]}
+                  spaceBetween={24}
+                  slidesPerView={3}
+                  centeredSlides={true}
+                  speed={1500}
+                  autoplay={{ delay: 3000, disableOnInteraction: false }}
+                  loop={true}
+                  style={{ paddingBottom: 8, width: '100%', maxWidth: '100%' }}
+                >
+                  {internationalDestinations.concat(internationalDestinations).map((dest, idx) => (
+                    <SwiperSlide key={dest.id + idx} style={{ minWidth: 0, display: 'flex', justifyContent: 'center' }}>
+                      <PackageCard
+                        id={dest.id}
+                        title={`${dest.name} | 4 dias`}
+                        destination={dest.name}
+                        image={dest.image}
+                        price="R$ 1.999"
+                        duration="4 dias"
+                        groupSize="2 pessoas"
+                        description={dest.description}
+                        onRequestQuote={onRequestQuote}
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Destinos Nacionais - Novo Layout */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 px-4">
-          {/* Lado esquerdo: carrossel de cards */}
-          <div className="flex-2 w-full overflow-x-auto order-2 md:order-1">
-            <div className="flex flex-row gap-6 min-w-[400px] md:min-w-[600px] lg:min-w-[800px]">
-              {nationalDestinations.map((dest, idx) => (
-                <FeaturedSectionCard
-                  key={dest.id}
-                  image={dest.image}
-                  title={dest.name}
-                  subtitle="Saindo de São Paulo"
-                  dateStart="29/11/2025"
-                  dateEnd="06/12/2025"
-                  priceLabel="Ida e volta"
-                  priceValue={idx === 0 ? '4x de R$ 154' : idx === 1 ? '10x de R$ 73' : '10x de R$ 107'}
-                  priceInstallment={`A partir de R$ ${idx === 0 ? '616' : idx === 1 ? '725' : '1.068'}`}
-                  icon={<svg width="20" height="20" fill="none" stroke="var(--accent)" strokeWidth="2" viewBox="0 0 24 24"><path d="M2 16l20-5-8.5-2.5L12 2l-1.5 6.5L2 16z" /><circle cx="12" cy="19" r="2" /></svg>}
-                />
-              ))}
+      <section className="py-16 bg-gray-50 w-full">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            {/* Lado esquerdo: carrossel de cards */}
+            <div className="flex-1 max-w-[800px] min-w-0 flex items-center justify-start">
+              <Swiper
+                modules={[Autoplay]}
+                spaceBetween={24}
+                slidesPerView={3}
+                centeredSlides={true}
+                speed={1500}
+                autoplay={{ delay: 3000, disableOnInteraction: false }}
+                loop={true}
+                style={{ paddingBottom: 8, width: '100%', maxWidth: '100%' }}
+              >
+                {nationalDestinations.concat(nationalDestinations).map((dest, idx) => (
+                  <SwiperSlide key={dest.id + idx} style={{ minWidth: 0, display: 'flex', justifyContent: 'center' }}>
+                    <PackageCard
+                      id={dest.id}
+                      title={`${dest.name} | 7 dias`}
+                      destination={dest.name}
+                      image={dest.image}
+                      price={idx % 3 === 0 ? 'R$ 616' : idx % 3 === 1 ? 'R$ 725' : 'R$ 1.068'}
+                      duration="7 dias"
+                      groupSize="2 pessoas"
+                      description={dest.description}
+                      onRequestQuote={onRequestQuote}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </div>
-          </div>
-          {/* Lado direito: destaque visual e texto */}
-          <div className="flex-1 flex flex-col items-start justify-center mb-8 md:mb-0 md:pl-8 order-1 md:order-2">
-            <div className="mb-6">
-              {/* Ícone ilustrativo */}
-              <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="42" cy="14" r="14" fill="#FFEB3B" />
-                <path d="M10 38l36-8-12-4-2-8-4 8-12 4z" stroke="var(--accent)" strokeWidth="3" fill="white" />
-                <path d="M28 44a4 4 0 100-8 4 4 0 000 8z" stroke="var(--accent)" strokeWidth="2" fill="white" />
-              </svg>
+            {/* Lado direito: destaque visual e texto */}
+            <div className="flex-1 flex flex-col items-start justify-center mb-12 md:mb-0 md:pr-12 min-w-[260px] max-w-xs">
+              <div className="mb-6">
+                {/* Ícone ilustrativo */}
+                <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="42" cy="14" r="14" fill="#FFEB3B" />
+                  <path d="M10 38l36-8-12-4-2-8-4 8-12 4z" stroke="var(--accent)" strokeWidth="3" fill="white" />
+                  <path d="M28 44a4 4 0 100-8 4 4 0 000 8z" stroke="var(--accent)" strokeWidth="2" fill="white" />
+                </svg>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-black leading-tight">
+                <span className="text-(--accent)">Os melhores</span> preços<br />
+              </h2>
+              <p className="text-gray-500 mb-4">Saindo de <span className="text-(--accent) underline cursor-pointer">São Paulo <span className="align-middle">▼</span></span></p>
+              <span className="text-xs text-gray-400 mt-2">*Taxas de embarque serão cobradas na primeira parcela</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-black leading-tight">
-              <span className="text-(--accent)">Os melhores</span> preços<br />
-            </h2>
-            <p className="text-gray-500 mb-4">Saindo de <span className="text-(--accent) underline cursor-pointer">São Paulo <span className="align-middle">▼</span></span></p>
-            <span className="text-xs text-gray-400 mt-2">*Taxas de embarque serão cobradas na primeira parcela</span>
           </div>
         </div>
       </section>
@@ -255,7 +285,7 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
       </section>
 
       {/* Pacotes em destaque - Comercial */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white max-w-6xl mx-auto">
         <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 px-4">
           {/* Lado esquerdo: texto comercial e destaque visual */}
           <div className="flex-1 flex flex-col items-start justify-center mb-12 md:mb-0 md:pr-12">
@@ -282,8 +312,8 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
             </Button>
           </div>
           {/* Lado direito: cards de pacotes */}
-          <div className="flex-[2] w-full">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+          <div className="w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-8 max-w-full">
               {packages.slice(0, 6).map((pkg) => (
                 <PackageCard
                   key={pkg.id}

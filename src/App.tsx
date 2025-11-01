@@ -1,18 +1,18 @@
-import { useState, useEffect } from 'react';
-import { Header } from './components/Header';
+import { useEffect, useState } from 'react';
 import { Footer } from './components/Footer';
-import { WhatsAppButton } from './components/WhatsAppButton';
+import { Header } from './components/Header';
 import { QuoteModal } from './components/QuoteModal';
-import { HomePage } from './pages/HomePage';
-import { ViagensPage } from './pages/ViagensPage';
-import { CorporativoPage } from './pages/CorporativoPage';
-import { SobrePage } from './pages/SobrePage';
-import { ContatoPage } from './pages/ContatoPage';
-import { GruposPage } from './pages/GruposPage';
-import { GaleriaPage } from './pages/GaleriaPage';
-import { BlogPage } from './pages/BlogPage';
 import { Toaster } from './components/ui/sonner';
+import { WhatsAppButton } from './components/WhatsAppButton';
 import { packages } from './data/mockData';
+import { BlogPage } from './pages/BlogPage';
+import { ContatoPage } from './pages/ContatoPage';
+import { CorporativoPage } from './pages/CorporativoPage';
+import { GaleriaPage } from './pages/GaleriaPage';
+import { GruposPage } from './pages/GruposPage';
+import { HomePage } from './pages/HomePage';
+import { SobrePage } from './pages/SobrePage';
+import { ViagensPage } from './pages/ViagensPage';
 
 type Page = 'home' | 'viagens' | 'grupos' | 'corporativo' | 'galeria' | 'blog' | 'sobre' | 'contato';
 
@@ -62,15 +62,15 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header currentPage={currentPage} onNavigate={handleNavigate} />
-      
+
       <main className="flex-1">
         {renderPage()}
       </main>
 
       <Footer onNavigate={handleNavigate} />
-      
+
       <WhatsAppButton />
-      
+
       <QuoteModal
         isOpen={quoteModalOpen}
         onClose={() => {
