@@ -227,7 +227,7 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
                 </svg>
               </div>
               <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-black leading-tight">
-                <span className="text-(--accent)">Os melhores</span> preços<br />
+                <span className="text-[var(--accent)]">Os melhores</span> preços<br />
               </h2>
               <p className="text-gray-500 mb-4">Saindo de <span className="text-(--accent) underline cursor-pointer">São Paulo <span className="align-middle">▼</span></span></p>
               <span className="text-xs text-gray-400 mt-2">*Taxas de embarque serão cobradas na primeira parcela</span>
@@ -272,7 +272,7 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
                   <Button
                     type="submit"
                     size="lg"
-                    className="w-full bg-[--secondary] hover:bg-[--accent] text-white rounded-full"
+                    className="w-full bg-[var(--secondary)] hover:bg-[var(--accent)] text-white rounded-full"
                   >
                     <Mail className="w-5 h-5 mr-2" />
                     Quero receber ofertas
@@ -297,7 +297,7 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
               </svg>
             </div>
             <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-black leading-tight">
-              <span className="text-(--accent)">Pacotes exclusivos</span> para sua próxima viagem
+              <span className="text-[var(--accent)]">Pacotes exclusivos</span> para sua próxima viagem
             </h2>
             <p className="text-gray-600 text-lg mb-6 max-w-md">
               Descubra ofertas imperdíveis, roteiros completos e condições especiais para transformar seu sonho em realidade. Reserve agora e viaje com tranquilidade!
@@ -305,7 +305,7 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
             <Button
               onClick={() => onNavigate('viagens')}
               size="lg"
-              className="bg-(--accent) hover:bg-(--accent)/80 text-white rounded-full px-10 py-6 text-lg font-bold shadow-xl transition-all duration-200"
+              className="bg-[var(--accent)] hover:bg-[var(--accent)]/80 text-white rounded-full px-10 py-6 text-lg font-bold shadow-xl transition-all duration-200"
             >
               Ver todos os pacotes
               <ArrowRight className="ml-2 w-5 h-5" />
@@ -346,7 +346,7 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
                 />
                 <div className="p-6">
                   <div className="flex items-center gap-2 mb-3">
-                    <span className="bg-[--accent] text-[--neutral] px-3 py-1 rounded-full text-xs">
+                    <span className="bg-[var(--accent)] text-[var(--neutral)] px-3 py-1 rounded-full text-xs">
                       {post.category}
                     </span>
                     <span className="text-sm text-gray-500">
@@ -358,7 +358,7 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
                   <Button
                     onClick={() => onNavigate('blog')}
                     variant="outline"
-                    className="rounded-full border-[--secondary] text-[--secondary] hover:bg-[--secondary] hover:text-white"
+                    className="rounded-full border-[var(--secondary)] text-[var(--secondary)] hover:bg-[var(--secondary)] hover:text-white"
                   >
                     Ler mais
                   </Button>
@@ -372,7 +372,7 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
               onClick={() => onNavigate('blog')}
               size="lg"
               variant="outline"
-              className="rounded-full border-[--secondary] text-[--secondary] hover:bg-[--secondary] hover:text-white"
+              className="rounded-full border-[var(--secondary)] text-[var(--secondary)] hover:bg-[var(--secondary)] hover:text-white"
             >
               Ver todos os artigos
               <ArrowRight className="ml-2 w-5 h-5" />
@@ -411,7 +411,7 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
             <Button
               onClick={() => onNavigate('galeria')}
               size="lg"
-              className="bg-[--secondary] hover:bg-[--accent] text-white rounded-full px-8"
+              className="bg-[var(--secondary)] hover:bg-[var(--accent)] text-white rounded-full px-8"
             >
               Ver galeria completa
               <ArrowRight className="ml-2 w-5 h-5" />
@@ -421,7 +421,7 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
       </section>
 
       {/* CTA Final */}
-      <section className="py-20 bg-gradient-to-r from-[--accent] to-[--secondary] text-white">
+      <section className="py-20 bg-gradient-to-r from-[var(--accent)] to-[var(--secondary)] text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-white mb-6">Pronto para Sua Próxima Aventura?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-100">
@@ -430,7 +430,7 @@ export function HomePage({ onNavigate, onRequestQuote }: HomePageProps) {
           <Button
             onClick={() => onNavigate('contato')}
             size="lg"
-            className="bg-[--accent] text-[--neutral] hover:bg-yellow-400 rounded-full px-8"
+            className="bg-[var(--accent)] text-[var(--neutral)] hover:bg-yellow-400 rounded-full px-8"
           >
             Solicitar Orçamento
             <ArrowRight className="ml-2 w-5 h-5" />

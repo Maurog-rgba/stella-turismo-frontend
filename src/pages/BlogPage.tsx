@@ -8,7 +8,7 @@ export function BlogPage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="bg-gradient-to-br from-[--primary] to-[--secondary] text-white py-16">
+      <section className="bg-gradient-to-br from-[var(--primary)] to-[var(--secondary)] text-white py-16">
         <div className="container mx-auto px-4">
           <h1 className="text-white mb-4">Blog de Viagens</h1>
           <p className="text-xl text-gray-100 max-w-2xl">
@@ -20,7 +20,7 @@ export function BlogPage() {
       {/* Featured Post */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="bg-gradient-to-br from-[--primary] to-[--secondary] rounded-2xl overflow-hidden shadow-xl">
+          <div className="bg-gradient-to-br from-[var(--primary)] to-[var(--secondary)] rounded-2xl overflow-hidden shadow-xl">
             <div className="grid grid-cols-1 lg:grid-cols-2">
               <div className="h-64 lg:h-auto">
                 <ImageWithFallback
@@ -30,7 +30,7 @@ export function BlogPage() {
                 />
               </div>
               <div className="p-8 lg:p-12 text-white flex flex-col justify-center">
-                <Badge className="bg-[--accent] text-[--neutral] hover:bg-[--accent] w-fit mb-4">
+                <Badge className="bg-[var(--accent)] text-[var(--neutral)] hover:bg-[var(--accent)] w-fit mb-4">
                   Destaque
                 </Badge>
                 <h2 className="text-white mb-4">{blogPosts[0].title}</h2>
@@ -63,7 +63,7 @@ export function BlogPage() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <h2 className="mb-12">Últimas Postagens</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogPosts.map((post) => (
               <article key={post.id} className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group">
@@ -73,30 +73,30 @@ export function BlogPage() {
                     alt={post.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                  <Badge className="absolute top-4 right-4 bg-[--accent] text-[--neutral] hover:bg-[--accent]">
+                  <Badge className="absolute top-4 right-4 bg-[var(--accent)] text-[var(--neutral)] hover:bg-[var(--accent)]">
                     {post.category}
                   </Badge>
                 </div>
-                
+
                 <div className="p-6">
-                  <h3 className="mb-3 group-hover:text-[--secondary] transition-colors">
+                  <h3 className="mb-3 group-hover:text-[var(--secondary] transition-colors">
                     {post.title}
                   </h3>
-                  
+
                   <p className="text-gray-600 text-sm mb-4 line-clamp-2">
                     {post.excerpt}
                   </p>
-                  
+
                   <div className="flex items-center justify-between pt-4 border-t">
                     <div className="flex items-center gap-2 text-sm text-gray-500">
                       <Calendar className="w-4 h-4" />
                       <span>{new Date(post.date).toLocaleDateString('pt-BR')}</span>
                     </div>
-                    
+
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="text-[--secondary] hover:text-[--primary] p-0"
+                      className="text-[var(--secondary)] hover:text-[var(--primary)] p-0"
                     >
                       Ler mais
                       <ArrowRight className="ml-1 w-4 h-4" />
@@ -115,30 +115,30 @@ export function BlogPage() {
                     alt={post.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                  <Badge className="absolute top-4 right-4 bg-[--accent] text-[--neutral] hover:bg-[--accent]">
+                  <Badge className="absolute top-4 right-4 bg-[var(--accent)] text-[var(--neutral)] hover:bg-[var(--accent)]">
                     {post.category}
                   </Badge>
                 </div>
-                
+
                 <div className="p-6">
-                  <h3 className="mb-3 group-hover:text-[--secondary] transition-colors">
+                  <h3 className="mb-3 group-hover:text-[var(--secondary)] transition-colors">
                     {post.title}
                   </h3>
-                  
+
                   <p className="text-gray-600 text-sm mb-4 line-clamp-2">
                     {post.excerpt}
                   </p>
-                  
+
                   <div className="flex items-center justify-between pt-4 border-t">
                     <div className="flex items-center gap-2 text-sm text-gray-500">
                       <Calendar className="w-4 h-4" />
                       <span>{new Date(post.date).toLocaleDateString('pt-BR')}</span>
                     </div>
-                    
+
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="text-[--secondary] hover:text-[--primary] p-0"
+                      className="text-[var(--secondary)] hover:text-[var(--primary)] p-0"
                     >
                       Ler mais
                       <ArrowRight className="ml-1 w-4 h-4" />
@@ -154,7 +154,7 @@ export function BlogPage() {
       {/* Newsletter */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="bg-gradient-to-r from-[--primary] to-[--secondary] rounded-2xl p-8 lg:p-12 text-center text-white">
+          <div className="bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] rounded-2xl p-8 lg:p-12 text-center text-white">
             <h2 className="text-white mb-4">Inscreva-se em Nossa Newsletter</h2>
             <p className="text-gray-100 mb-8 max-w-2xl mx-auto">
               Receba dicas exclusivas, promoções especiais e novidades sobre os melhores destinos diretamente no seu e-mail.
@@ -163,9 +163,9 @@ export function BlogPage() {
               <input
                 type="email"
                 placeholder="Seu e-mail"
-                className="flex-1 px-6 py-3 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-[--accent]"
+                className="flex-1 px-6 py-3 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent"
               />
-              <Button className="bg-[--accent] text-[--neutral] hover:bg-yellow-400 rounded-full px-8">
+              <Button className="bg-[var(--accent)] text-[var(--neutral)] hover:bg-yellow-400 rounded-full px-8">
                 Inscrever
               </Button>
             </div>

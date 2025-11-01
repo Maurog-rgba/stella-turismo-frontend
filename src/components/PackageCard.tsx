@@ -56,17 +56,17 @@ export function PackageCard({
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         />
         {featured && (
-          <Badge className="absolute top-4 right-4 bg-[--accent] text-[--neutral] hover:bg-[--accent] border-none">
+          <Badge className="absolute top-4 right-4 bg-[var(--accent)] text-[var(--neutral)] hover:bg-[var(--accent)] border-none">
             Destaque
           </Badge>
         )}
-        
+
         {/* Share button */}
         <div className="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <div className="relative group/share">
             <Button
               size="sm"
-              className="bg-white/90 hover:bg-white text-[--neutral] rounded-full"
+              className="bg-white/90 hover:bg-white text-[var(--neutral)] rounded-full"
             >
               <Share2 className="w-4 h-4" />
             </Button>
@@ -97,17 +97,17 @@ export function PackageCard({
       {/* Content */}
       <div className="p-6">
         <div className="flex items-start justify-between mb-3">
-          <h3 className="text-xl font-semibold text-[--primary] group-hover:text-[--secondary] transition-colors">
+          <h3 className="text-xl font-semibold text-[var(--primary)] group-hover:text-[var(--secondary)] transition-colors">
             {title}
           </h3>
         </div>
 
-        <div className="flex items-center gap-2 text-[--secondary] mb-4">
+        <div className="flex items-center gap-2 text-[var(--secondary)] mb-4">
           <MapPin className="w-4 h-4" />
           <span className="text-sm">{destination}</span>
         </div>
 
-        <p className="text-[--base-content] text-sm mb-4 line-clamp-2">
+        <p className="text-[var(--base-content)] text-sm mb-4 line-clamp-2">
           {description}
         </p>
 
@@ -131,7 +131,7 @@ export function PackageCard({
           </div>
           <Button
             onClick={() => onRequestQuote(id)}
-            className="bg-[--secondary] hover:bg-[--primary] text-white rounded-full px-6"
+            className="bg-[var(--secondary)] hover:bg-[var(--primary)] text-white rounded-full px-6"
           >
             <DollarSign className="w-4 h-4 mr-1" />
             Solicitar Orçamento

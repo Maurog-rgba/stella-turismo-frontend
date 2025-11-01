@@ -90,19 +90,12 @@ export function Header({ currentPage, onNavigate }: HeaderProps) {
   };
 
   const mainMenu = [
-    { id: "hospedagens", label: "Hospedagens", icon: menuIcons.hospedagens },
-    { id: "passagens", label: "Passagens", icon: menuIcons.passagens },
-    { id: "pacotes", label: "Pacotes", icon: menuIcons.pacotes },
-    { id: "ofertas", label: "Ofertas", icon: menuIcons.ofertas },
-    { id: "prontos", label: "Pacotes prontos", icon: menuIcons.prontos },
-    { id: "alugueis", label: "Aluguéis", icon: menuIcons.alugueis },
-    { id: "passeios", label: "Passeios", icon: menuIcons.passeios },
-    { id: "carros", label: "Carros", icon: menuIcons.carros },
-    { id: "disney", label: "Disney", icon: menuIcons.disney },
-    { id: "universal", label: "Universal", icon: menuIcons.universal },
-    { id: "cruzeiros", label: "Cruzeiros", icon: menuIcons.cruzeiros },
-    { id: "seguros", label: "Seguros", icon: menuIcons.seguros },
-    { id: "transfers", label: "Transfers", icon: menuIcons.transfers },
+    { id: "travels", label: "Pacotes de Viagem", icon: menuIcons.pacotes },
+    { id: "promotions", label: "Promoções", icon: menuIcons.ofertas },
+    { id: "places", label: "Lugares", icon: menuIcons.cruzeiros },
+    { id: "viagens", label: "Viagens", icon: menuIcons.seguros },
+    { id: "blog", label: "Blog & Dicas", icon: menuIcons.passeios },
+    { id: "company", label: "Empresa", icon: menuIcons.prontos },
   ];
 
   return (
@@ -113,7 +106,7 @@ export function Header({ currentPage, onNavigate }: HeaderProps) {
           <div className="flex items-center gap-2">
             <Phone className="w-4 h-4" />
             <span>
-              Televendas <strong>0800 883 6342</strong>
+              Televendas <strong>0800 888 8888</strong>
             </span>
           </div>
           <div className="flex items-center gap-6 text-gray-200">
